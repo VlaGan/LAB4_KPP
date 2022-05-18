@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Додати коментар
+{% endblock %}}
+
+{% block content %}
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal">StackOverflow Analog</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.title }}<br>
+                    {{ form.comment }}<br>
+                    <button type="submit" class="btn btn-success">Коментувати</button>
+                </div>
+                <span>{{ error }}</span>
+            </form>
+
+            <div class="col-lg-6">
+                <div class="comment-field">
+                    {% if comments %}
+                    {% for i in comments %}
+                    <div class="alert alert-success mt-2">
+                        <h3>{{ i.title }}</h3>
+                        <p>{{ i.comment }}</p>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                            <p class="fs-5 text-muted">Немає нових коментарів!</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}}
